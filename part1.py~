@@ -1,8 +1,0 @@
-# Greg Polmatier
-
-def sortFunc(a, b, c):
-    floats = [a,b,c]
-    ceiling = map(ceil, floats)
-
-    for i in range(3):
-        if 
