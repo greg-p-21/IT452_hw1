@@ -4,6 +4,7 @@
 # Cameron Berger and Greg Polmatier
 
 import numpy as np
+import refframe
 
 # return roll, pitch, yaw
 # T: the matrix after final transformation
@@ -31,22 +32,17 @@ def findAngles(T):
 
     return roll, pitch, yaw
 
-# Create the final transformation matrix for the arm
-# a1,a2, a3, a4: angle of the joints 1-4
-# T: the matrix after the final transformation
-def getMatrix(a1, a2, a3, a4):
-    T = np.eye(4)
-
-    return T
 
 if __name__ == "__main__":
-    a1 = input("Enter angle 1: ")
-    a2 = input("Enter angle 2: ")
-    a3 = input("Enter angle 3: ")
-    a4 = input("Enter angle 4: ")
+    a1 = float(input("Enter angle 1: "))
+    a2 = float(input("Enter angle 2: "))
+    a3 = float(input("Enter angle 3: "))
+    a4 = float(input("Enter angle 4: "))
 
     # get final matrix
-    m = getMatrix(a1, a2, a3, a4)
+    m = refframe.makeBigT(a1, a2, a3, a4)
     x, y, Z = m[0,3], m[1,3], m[2,3]
     roll, pitch, yaw = findAngles(m)
-    
+    output = 'position (' + repr(x) + ', ' + repr(y) + ', ' + repr(z) + ')'
+    output += 'orientation (' + repr(roll) + ', ' + repr(pitch) + ', ' + repr(yaw) + ')'
+    print(output) 
