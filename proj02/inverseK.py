@@ -16,7 +16,7 @@ def makeT(x, y, z, psi, phi, theta):
     return np.matrix([  [ctheta*cphi, -stheta*cpsi + ctheta*sphi*spsi,  stheta*spsi + ctheta*sphi*cpsi,  x],
                         [stheta*cphi,  ctheta*cpsi + stheta*sphi*spsi, -ctheta*spsi + stheta*sphi*cpsi,  y],
                         [-sphi,        cphi*spsi,                       cphi*cpsi,                       z],
-                        [0, 0, 0, 1]])
+                        [0,             0,                              0,                               1]])
 
 def getAngles(T):
     # lengths 
@@ -25,13 +25,15 @@ def getAngles(T):
     L3 = 0.126
 
     # angle 1
-    a1 = np.arctan2(-T[0,0], T[1,1])
+    a1 = np.arctan2(-T[0,1], T[1,1])
     
     # angle 2
     # cos(a2)
-    c2 = (T[0,3]/np.cos(a1) - T[2,0]*L3) / L2
-    # sin(a2)
-    s2 = ((T[2,3] - D1) - T[2,0] * L3)/ L2 
+    # s2 = ((T[2,3] - D1) - T[2,0] * L3) / L2					
+    # # sin(a2)
+    # c2 = ((T[0,3]/np.cos(a1)) - (T[2,2] * L3)) / L2					
+    c2 = (T[0,3] - np.cos(a1)*L3*T[2,2])/ L2
+    s2 = (T[2,3] - L3* T[2,0] - D1) / L2
     a2 = np.arctan2(s2, c2)
 
     # angle 3
@@ -56,5 +58,5 @@ if __name__ == "__main__":
     a2 = theta2 - .7131
     a3 = theta3 + .7131
 
-    output = '\n (' + repr(a1) + ', ' + repr(a2) + ', ' + repr(a3) + ')\n'
+    output = '\n(' + repr(a1) + ', ' + repr(a2) + ', ' + repr(a3) + ')'
     print(output)
