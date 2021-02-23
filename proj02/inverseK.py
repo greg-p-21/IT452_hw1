@@ -10,7 +10,7 @@ def makeT(x, y, z, psi, phi, theta):
     cpsi    = np.cos(psi)
     cphi    = np.cos(phi)
     ctheta  = np.cos(theta)
-    
+
     spsi    = np.sin(psi)
     sphi    = np.sin(phi)
     stheta  = np.sin(theta)
@@ -60,9 +60,9 @@ if __name__ == "__main__":
 
     # print(theta1, theta2, theta3)
 
-    a1 = abs(theta1 + 0)
-    a2 = abs(theta2 - .7131)
-    a3 = abs(theta3 + .7131)
+    a1 = theta1 + 0
+    a2 = theta2 - .7131
+    a3 = theta3 + .7131
 
     angles = [a1,a2,0,a3]
     print(angles)
