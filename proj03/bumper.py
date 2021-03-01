@@ -26,7 +26,7 @@ try:
         
 except Exception as e:
     print(e)
-    rospy.loginto("node now terminated")
+    # rospy.loginto("node now terminated")
 
 
 def turn(angle):
