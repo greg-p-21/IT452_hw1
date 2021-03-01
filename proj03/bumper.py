@@ -13,9 +13,11 @@ try:
     r.drive(angSpeed=0, linSpeed=.25)
     while not rospy.is_shutdown():
         bump = r.getBumpStatus()
+        print(bump)
         if bump['status'] == 1:
             if bump['bumper'] == 1:
                 if random.choice([True, False]):
+                    print("got to turn")
                     turn(math.pi/2)
                 else:
                     turn(-math.pi/2)    
@@ -38,6 +40,8 @@ def turn(angle):
 
     if angle == 0:
         return
+
+    print("deep in turn")
 
     speed = .3
     r.drive(angSpeed=speed*sign, linSpeed=0)
