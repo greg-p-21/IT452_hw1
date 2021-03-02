@@ -8,8 +8,14 @@ from turtleAPI import robot
 
 R = robot()
 
-def diff(a1, a2):
-    return abs(a1-a2)
+def diff(afinal, acurr):
+    x = afinal
+    if afinal > math.pi:
+        x = -1 * (afinal - math.pi)
+
+    if afinal < -math.pi:
+        x = -1 * (afinal + math.pi)
+    return abs(acurr, x)
 
 def turn(angle):
     currYaw = R.getAngle()[2]
