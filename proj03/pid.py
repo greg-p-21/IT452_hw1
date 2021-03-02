@@ -7,12 +7,12 @@ class PID:
     
     def __init__(self):
         self.Kp = 0.5
-        self.Ki = 0.003
-        self.Kd = 0.001
+        self.Ki = 0.0001
+        self.Kd = 0.0001
         
         self.kp_angle = .5
-        self.ki_angle = .003
-        self.kd_angle = .001
+        self.ki_angle = .0001
+        self.kd_angle = .0001
 
         self.distErrorTrack = list() #list representing previous distance errors
         self.angErrorTrack = list() #list representing previous distance errors
@@ -59,6 +59,8 @@ class PID:
 
         derivative = self.Kd * (self.distErrorTrack[len(self.distErrorTrack)-1] - self.distErrorTrack[len(self.distErrorTrack)-2])
 
+        print("distance kp,ki,kd", (proportional, integral, derivative))
+
         pidVal = proportional + integral + derivative
 
         return pidVal
@@ -87,6 +89,8 @@ class PID:
         integral = self.ki_angle * self.integralIsh(self.angErrorTrack)
 
         derivative = self.kd_angle * dif_angle
+
+        print("angle kp,ki,kd", (proportional, integral, derivative))
 
         pid_angle = proportional + integral + derivative
 
