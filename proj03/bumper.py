@@ -9,9 +9,11 @@ from turtleAPI import robot
 try:
     print("creating robot")
     r = robot()
+    rate = rospy.Rate(10)
     # drive straight
     r.drive(angSpeed=0, linSpeed=.25)
     while not rospy.is_shutdown():
+        rate.sleep()
         bump = r.getBumpStatus()
         print(bump)
         # print(bump['status'])
