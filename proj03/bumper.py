@@ -13,7 +13,8 @@ try:
     r.drive(angSpeed=0, linSpeed=.25)
     while not rospy.is_shutdown():
         bump = r.getBumpStatus()
-        print(type(bump))
+        print(bump)
+        print(bump['status'])
         if bump['status'] == 1:
             if bump['bumper'] == 1:
                 if random.choice([True, False]):
