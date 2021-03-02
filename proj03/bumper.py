@@ -6,13 +6,13 @@ import math
 import rospy
 from turtleAPI import robot
 
-
+R = robot()
 
 def diff(a1, a2):
     return abs(a1-a2)
 
 def turn(angle):
-    currYaw = r.getAngle()[2]
+    currYaw = R.getAngle()[2]
     finalAngle = currYaw + angle
     
     sign = 1
@@ -25,22 +25,22 @@ def turn(angle):
     print("deep in turn")
     RATE = rospy.Rate(10)
     speed = .3
-    r.drive(angSpeed=speed*sign, linSpeed=0)
-    while diff(finalAngle, r.getAngle()[2]) > .1:
+    print("here now")
+    R.drive(angSpeed=speed*sign, linSpeed=0)
+    while diff(finalAngle, R.getAngle()[2]) > .1:
         RATE.sleep()
-        print(r.getAngle[2], finalAngle)
+        print(R.getAngle[2], finalAngle)
 
     return 
 
 try:
     print("creating robot")
-    r = robot()
     RATE = rospy.Rate(10)
     # drive straight
-    r.drive(angSpeed=0, linSpeed=.25)
+    R.drive(angSpeed=0, linSpeed=.25)
     while not rospy.is_shutdown():
         RATE.sleep()
-        bump = r.getBumpStatus()
+        bump = R.getBumpStatus()
         print(bump)
         # print(bump['status'])
         if bump['state'] == '-1':
@@ -54,7 +54,7 @@ try:
                 turn(-math.pi/4)
             else:
                 turn(math.pi/4)
-        r.drive(angSpeed=0, linSpeed=.25)
+        R.drive(angSpeed=0, linSpeed=.25)
         
 except Exception as e:
     print(e)
