@@ -11,7 +11,7 @@ class PID:
         self.Kd = 0.01
         
         self.kp_angle = .1
-        self.ki_angle = .05
+        self.ki_angle = .01
         self.kd_angle = .01
 
         self.distErrorTrack = list() #list representing previous distance errors
