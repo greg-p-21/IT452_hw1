@@ -10,6 +10,7 @@ def diff(a1, a2):
     return abs(a1-a2)
 
 def turn(angle):
+    print(r.getAngle())
     finalAngle = r.getAngle() + angle
     
     sign = 1
