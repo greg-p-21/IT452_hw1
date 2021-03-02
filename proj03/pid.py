@@ -6,13 +6,13 @@ import rospy
 class PID:
     
     def __init__(self):
-        self.Kp = 0.5
-        self.Ki = 0.0001
-        self.Kd = 0.0001
+        self.Kp = 1
+        self.Ki = 0.01
+        self.Kd = 0.01
         
-        self.kp_angle = .5
-        self.ki_angle = .0001
-        self.kd_angle = .0001
+        self.kp_angle = .1
+        self.ki_angle = .01
+        self.kd_angle = .01
 
         self.distErrorTrack = list() #list representing previous distance errors
         self.angErrorTrack = list() #list representing previous distance errors
@@ -134,6 +134,7 @@ class PID:
             distance = self.distErrorTrack[len(self.distErrorTrack)-1]
 
         print("Reached end")
+        R.drive(angSpeed=0, linSpeed=0)
 
 if __name__ == "__main__":
     for i in range(2):
@@ -147,3 +148,4 @@ if __name__ == "__main__":
 
         pid.GoTo((x, y))
 
+    
