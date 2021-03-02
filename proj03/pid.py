@@ -7,11 +7,11 @@ class PID:
     
     def __init__(self):
         self.Kp = 0.5
-        self.Ki = 0.01
+        self.Ki = 0.003
         self.Kd = 0.001
         
-        self.kp_angle = .1
-        self.ki_angle = .03
+        self.kp_angle = .5
+        self.ki_angle = .003
         self.kd_angle = .001
 
         self.distErrorTrack = list() #list representing previous distance errors
@@ -77,6 +77,9 @@ class PID:
                 angle = 2*math.pi + angle
         
         self.angErrorTrack.append(angle)
+        if len(self.angErrorTrack) > self.stepTrack:
+            self.angErrorTrack.pop(0)
+
         dif_angle = angle - self.angErrorTrack[len(self.angErrorTrack)-2] #for kd
 
         proportional = self.kp_angle * self.angErrorTrack[len(self.angErrorTrack)-1]
