@@ -14,8 +14,8 @@ try:
     while not rospy.is_shutdown():
         bump = r.getBumpStatus()
         print(bump)
-        print(bump['status'])
-        if bump['status'] == 1:
+        # print(bump['status'])
+        if bump['state'] == 1:
             if bump['bumper'] == 1:
                 if random.choice([True, False]):
                     print("got to turn")
