@@ -54,14 +54,17 @@ try:
         if bump['state'] == 1:
             if bump['bumper'] == 1:
                 if random.choice([True, False]):
-                    print("got to turn")
+                    print("got to turn\n\n\n")
                     turn(math.pi/2)
                 else:
                     turn(-math.pi/2)    
             elif bump['bumper'] == 0:
-                turn(-math.pi/4)
-            else:
                 turn(math.pi/4)
+                print("cw\n\n\n")
+                print("ccw\n\n\n")
+            else:
+                print("cw\n\n\n")
+                turn(-math.pi/4)
         R.drive(angSpeed=0, linSpeed=.25)
         
 except Exception as e:
