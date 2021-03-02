@@ -51,6 +51,7 @@ try:
                 turn(-math.pi/4)
             else:
                 turn(math.pi/4)
+        r.drive(angSpeed=0, linSpeed=.25)
         
 except Exception as e:
     print(e)
