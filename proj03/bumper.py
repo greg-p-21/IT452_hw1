@@ -51,8 +51,8 @@ try:
         bump = R.getBumpStatus()
         print(bump)
         # print(bump['status'])
-        if bump['state'] == '-1':
-            if bump['bumper'] == '-1':
+        if bump['state'] == '1':
+            if bump['bumper'] == '1':
                 if random.choice([True, False]):
                     print("got to turn")
                     turn(math.pi/2)
