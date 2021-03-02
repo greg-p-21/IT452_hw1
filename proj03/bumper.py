@@ -22,16 +22,16 @@ def turn(angle):
     if angle == 0:
         return
 
-    print("deep in turn")
+    # print("deep in turn")
     RATE = rospy.Rate(10)
     speed = .3
-    print("here now")
+    # print("here now")
     R.drive(angSpeed=speed*sign, linSpeed=0)
-    print("1")
+    # print("1")
     while diff(finalAngle, R.getAngle()[2]) > .1:
         RATE.sleep()
-        print("2")
-        print(R.getAngle[2], finalAngle)
+        # print("2")
+        print(R.getAngle()[2], finalAngle)
 
     return 
 
