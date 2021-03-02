@@ -55,9 +55,9 @@ try:
             if bump['bumper'] == 1:
                 if random.choice([True, False]):
                     print("got to turn\n\n\n")
-                    turn(math.pi/2)
+                    turn(math.pi/2+.314)
                 else:
-                    turn(-math.pi/2)    
+                    turn(-math.pi/2-.314)    
             elif bump['bumper'] == 0:
                 turn(-math.pi/4-.314)
                 print("cw\n\n\n")
