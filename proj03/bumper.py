@@ -11,10 +11,10 @@ R = robot()
 def toScale(angle):
     x = angle
     if angle > math.pi:
-        x = -1 * (angle - math.pi)
+        x = angle - 2*math.pi
 
     elif angle < -math.pi:
-        x = -1 * (angle + math.pi)
+        x = angle + 2*math.pi
     
     return x
 
