@@ -57,13 +57,13 @@ try:
                     print("got to turn\n\n\n")
                     turn(math.pi/2 + .314)
                 else:
-                    turn(-math.pi/2+.314)    
+                    turn(-math.pi/2-.314)    
             elif bump['bumper'] == 0:
-                turn(-math.pi/4+.314)
+                turn(math.pi/4+.314)
                 print("cw\n\n\n")
             else:
                 print("ccw\n\n\n")
-                turn(math.pi/4)
+                turn(-math.pi/4 - .314)
         R.drive(angSpeed=0, linSpeed=.25+.314)
         
 except Exception as e:
