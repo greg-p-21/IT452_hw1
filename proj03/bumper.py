@@ -64,7 +64,7 @@ try:
             else:
                 print("ccw\n\n\n")
                 turn(math.pi/4 + .314)
-        R.drive(angSpeed=0, linSpeed=.25+.314)
+        R.drive(angSpeed=0, linSpeed=.15)
         
 except Exception as e:
     print(e)
