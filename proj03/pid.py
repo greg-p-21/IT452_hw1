@@ -131,7 +131,7 @@ class PID:
 
             # modify pid ie set max mins and put into a value
             # to insert into drive function below
-            lspeed = min(distance_pid, 0.4)
+            lspeed = min(distance_pid, 0.3)
             aspeed = angle_pid
 
             R.drive(angSpeed=aspeed, linSpeed=lspeed)
