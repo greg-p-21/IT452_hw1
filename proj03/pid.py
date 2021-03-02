@@ -6,7 +6,7 @@ import rospy
 class PID:
     
     def __init__(self):
-        self.Kp = .1
+        self.Kp = .05
         self.Ki = 0.01
         self.Kd = 0.01
         
@@ -124,7 +124,7 @@ class PID:
 
             # modify pid ie set max mins and put into a value
             # to insert into drive function below
-            lspeed = min(distance_pid, 0.4)
+            lspeed = min(distance_pid, 0.3)
             aspeed = angle_pid
 
             R.drive(angSpeed=aspeed, linSpeed=lspeed)
