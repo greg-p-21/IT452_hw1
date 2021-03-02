@@ -65,18 +65,23 @@ class PID:
 
         return pidVal
 
-    def anglePID(self, current, target):
+    def anglePID(self, current, target, last_rotation):
         target_x = target[0]
         target_y = target[1]
 
         (curr_x, curr_y, curr_yaw) = current
         angle = math.atan2(target_y - curr_y, target_x - curr_x)
 
-        # if angle < -math.pi/4 or angle > math.pi/4:
-        #     if target_y < 0 and curr_y < target_y:
-        #         angle = -math.pi + angle
-        #     elif target_y >= 0 and curr_y > target_y:
-        #         angle = math.pi + angle 
+        if angle < -math.pi/4 or angle > math.pi/4:
+            if target_y < 0 and curr_y < target_y:
+                angle = -math.pi + angle
+            elif target_y >= 0 and curr_y > target_y:
+                angle = math.pi + angle 
+        if last_rotation > math.pi-0.1 and curr_yaw <= 0:
+            curr_yaw = 2*math.pi + curr_yaw
+        elif last_rotation < -math.pi+0.1 and curr_yaw > 0:
+            curr_yaw = -2*math.pi + curr_yaw
+
         angleVel = angle - curr_yaw
         
         self.angErrorTrack.append(angleVel)
@@ -111,6 +116,8 @@ class PID:
         goalDistance = math.sqrt(pow( start_x- target_x, 2) + pow(start_y - target_y, 2))
         distance = goalDistance
 
+        last_rotation = 0
+
         while distance > 0.05:
             RATE.sleep()
 
@@ -118,13 +125,13 @@ class PID:
             # self.distError(current, target)
 
             distance_pid = self.distPID(current, target)
-            angle_pid = self.anglePID(current, target)
+            angle_pid = self.anglePID(current, target, last_rotation)
 
             print("dist and angle pid", (distance_pid, angle_pid))
 
             # modify pid ie set max mins and put into a value
             # to insert into drive function below
-            lspeed = min(distance_pid, 0.15)
+            lspeed = min(distance_pid, 0.3)
             aspeed = angle_pid
 
             R.drive(angSpeed=aspeed, linSpeed=lspeed)
@@ -132,8 +139,9 @@ class PID:
             print("current position", R.getPositionTup())
 
             distance = self.distErrorTrack[len(self.distErrorTrack)-1]
+            last_rotation = current[2]
 
-        print("Reached end")
+        print("Reached point")
         R.drive(angSpeed=0, linSpeed=0)
 
 if __name__ == "__main__":
