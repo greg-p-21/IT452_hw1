@@ -6,11 +6,11 @@ import rospy
 class PID:
     
     def __init__(self):
-        self.Kp = 0.2
+        self.Kp = 0.1
         self.Ki = 0.01
         self.Kd = 0.01
         
-        self.kp_angle = 1
+        self.kp_angle = .25
         self.ki_angle = .03
         self.kd_angle = .05
 
@@ -139,4 +139,3 @@ if __name__ == "__main__":
 
         pid.GoTo((x, y))
 
-        
