@@ -10,8 +10,8 @@ def diff(a1, a2):
     return abs(a1-a2)
 
 def turn(angle):
-    print(r.getAngle())
-    finalAngle = r.getAngle() + angle
+    currYaw = r.getAngle()[2]
+    finalAngle = currYaw + angle
     
     sign = 1
     if angle < 0:
@@ -24,7 +24,7 @@ def turn(angle):
 
     speed = .3
     r.drive(angSpeed=speed*sign, linSpeed=0)
-    while diff(finalAngle, r.getAngle()) > .1:
+    while diff(finalAngle, r.getAngle()[2]) > .1:
         print(r.getAngle, finalAngle)
 
     return 
