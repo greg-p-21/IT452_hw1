@@ -6,6 +6,8 @@ import math
 import rospy
 from turtleAPI import robot
 
+RATE = rospy.Rate(10)
+
 def diff(a1, a2):
     return abs(a1-a2)
 
@@ -25,18 +27,19 @@ def turn(angle):
     speed = .3
     r.drive(angSpeed=speed*sign, linSpeed=0)
     while diff(finalAngle, r.getAngle()[2]) > .1:
-        print(r.getAngle, finalAngle)
+        RATE.sleep()
+        print(r.getAngle[2], finalAngle)
 
     return 
 
 try:
     print("creating robot")
     r = robot()
-    rate = rospy.Rate(10)
+    
     # drive straight
     r.drive(angSpeed=0, linSpeed=.25)
     while not rospy.is_shutdown():
-        rate.sleep()
+        RATE.sleep()
         bump = r.getBumpStatus()
         print(bump)
         # print(bump['status'])
