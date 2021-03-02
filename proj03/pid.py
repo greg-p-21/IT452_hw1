@@ -72,17 +72,18 @@ class PID:
         (curr_x, curr_y, curr_yaw) = current
         angle = math.atan2(target_y - curr_y, target_x - curr_x)
 
-        if angle < -math.pi/4 or angle > math.pi/4:
-            if target_y < 0 and curr_y < target_y:
-                angle = -math.pi + angle
-            elif target_y >= 0 and curr_y > target_y:
-                angle = math.pi + angle
+        # if angle < -math.pi/4 or angle > math.pi/4:
+        #     if target_y < 0 and curr_y < target_y:
+        #         angle = -math.pi + angle
+        #     elif target_y >= 0 and curr_y > target_y:
+        #         angle = math.pi + angle 
+        angleVel = angle - curr_yaw
         
-        self.angErrorTrack.append(angle)
+        self.angErrorTrack.append(angleVel)
         if len(self.angErrorTrack) > self.stepTrack:
             self.angErrorTrack.pop(0)
 
-        dif_angle = angle - self.angErrorTrack[len(self.angErrorTrack)-2] #for kd
+        dif_angle = angleVel - self.angErrorTrack[len(self.angErrorTrack)-2] #for kd
 
         proportional = self.kp_angle * self.angErrorTrack[len(self.angErrorTrack)-1]
 
