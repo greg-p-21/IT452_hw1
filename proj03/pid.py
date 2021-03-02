@@ -6,13 +6,13 @@ import rospy
 class PID:
     
     def __init__(self):
-        self.Kp = 0.1
+        self.Kp = 0.5
         self.Ki = 0.01
-        self.Kd = 0.01
+        self.Kd = 0.001
         
-        self.kp_angle = .25
+        self.kp_angle = .1
         self.ki_angle = .03
-        self.kd_angle = .05
+        self.kd_angle = .001
 
         self.distErrorTrack = list() #list representing previous distance errors
         self.angErrorTrack = list() #list representing previous distance errors
