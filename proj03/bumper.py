@@ -8,14 +8,15 @@ from turtleAPI import robot
 
 R = robot()
 
-def diff(afinal, acurr):
-    x = afinal
-    if afinal > math.pi:
-        x = -1 * (afinal - math.pi)
+def toScale(angle):
+    x = angle
+    if angle > math.pi:
+        x = -1 * (angle - math.pi)
 
-    if afinal < -math.pi:
-        x = -1 * (afinal + math.pi)
-    return abs(acurr - x)
+    elif angle < -math.pi:
+        x = -1 * (angle + math.pi)
+    
+    return x
 
 def turn(angle):
     currYaw = R.getAngle()[2]
@@ -34,10 +35,10 @@ def turn(angle):
     # print("here now")
     R.drive(angSpeed=speed*sign, linSpeed=0)
     # print("1")
-    while diff(finalAngle, R.getAngle()[2]) > .1:
+    while abs(toScale(finalAngle) - R.getAngle()[2]) > .1:
         RATE.sleep()
         # print("2")
-        print(R.getAngle()[2], finalAngle)
+        print(R.getAngle()[2], toScale(finalAngle))
 
     return 
 
