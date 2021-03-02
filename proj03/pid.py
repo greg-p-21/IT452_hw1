@@ -74,9 +74,9 @@ class PID:
 
         if angle < -math.pi/4 or angle > math.pi/4:
             if target_y < 0 and curr_y < target_y:
-                angle = -2*math.pi + angle
+                angle = -math.pi + angle
             elif target_y >= 0 and curr_y > target_y:
-                angle = 2*math.pi + angle
+                angle = math.pi + angle
         
         self.angErrorTrack.append(angle)
         if len(self.angErrorTrack) > self.stepTrack:
