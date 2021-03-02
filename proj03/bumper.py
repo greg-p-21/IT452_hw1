@@ -15,7 +15,7 @@ def diff(afinal, acurr):
 
     if afinal < -math.pi:
         x = -1 * (afinal + math.pi)
-    return abs(acurr, x)
+    return abs(acurr - x)
 
 def turn(angle):
     currYaw = R.getAngle()[2]
