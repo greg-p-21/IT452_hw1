@@ -27,8 +27,10 @@ def turn(angle):
     speed = .3
     print("here now")
     R.drive(angSpeed=speed*sign, linSpeed=0)
+    print("1")
     while diff(finalAngle, R.getAngle()[2]) > .1:
         RATE.sleep()
+        print("2")
         print(R.getAngle[2], finalAngle)
 
     return 
