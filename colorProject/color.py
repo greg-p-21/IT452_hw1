@@ -17,5 +17,8 @@ mask = cv2.inRange(hsvB, lower_blue, upper_blue)
 result = cv2.bitwise_and(imgB, imgB, mask = mask)
 
 cv2.imshow('frame', imgB)
+cv2.waitKey(0)
 cv2.imshow('mask', mask)
+cv2.waitKey(0)
 cv2.imshow('result', result)
+cv2.waitKey(0)
