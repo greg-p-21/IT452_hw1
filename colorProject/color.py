@@ -34,7 +34,7 @@ result = cv2.bitwise_and(img, img, mask = mask)
 
 aug = img
 
-aug[mask != 0] = [0,255,0]
+aug[mask != 0] = [255,0,255]
 
 cv2.imshow('frame', img)
 cv2.waitKey(0)
