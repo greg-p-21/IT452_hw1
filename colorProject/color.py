@@ -12,7 +12,7 @@ color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'orange': [[24, 255, 255], [10, 50, 70]],
               'gray': [[180, 18, 230], [0, 0, 40]]}
 
-img = cv2.imread('green.png')
+img = cv2.imread('purple.png')
 
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -20,13 +20,13 @@ hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # lower_blue = np.array([90, 50, 70])
 # upper_blue = np.array([128, 255, 255])
 
-# # Threshold of green in HSV space
+# # Threshold of purple in HSV space
 # lower_green = np.array()
 # upper_green = np.array()
 
-print(color_dict_HSV['green'][1])
+print(color_dict_HSV['purple'][1])
 # preparing the mask to overlay
-mask = cv2.inRange(hsv, np.array(color_dict_HSV['green'][1]), np.array(color_dict_HSV['green'][0]))
+mask = cv2.inRange(hsv, np.array(color_dict_HSV['purple'][1]), np.array(color_dict_HSV['purple'][0]))
     
 # The black region in the mask has the value of 0,
 # so when multiplied with original image removes all non-blue regions
