@@ -40,21 +40,16 @@ class Filter:
             lower = np.array(Filter.HSV_COLOR_RANGES[color][1])
             upper = np.array(Filter.HSV_COLOR_RANGES[color][0])
             mask = cv2.inRange(hsv, lower, upper)
-            
-        # The black region in the mask has the value of 0,
-        # so when multiplied with original image removes all non-blue regions
-        # result = cv2.bitwise_and(img, img, mask = mask)
-
 
         img[mask != 0] = Filter.RGB_COLORS[color]
 
         return img
 
 if __name__ == '__main__':
-    yellow = Filter.get_filtered('yellow.png', 'yellow')
-    cv2.imshow("yellow", yellow)
-    cv2.waitKey(0)
+    colors = ['red', 'blue', 'green', 'purple', 'yellow']
 
-    red = Filter.get_filtered('red.png', 'red')
-    cv2.imshow('red', red)
-    cv2.waitKey(0)
+    for c in colors:
+        name = c + '.png'
+        f_img = Filter.get_filtered(name, c)
+        cv2.imshow(c, f_img)
+        cv2.waitKey(0)
