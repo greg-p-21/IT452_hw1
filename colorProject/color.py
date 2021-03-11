@@ -12,11 +12,9 @@ color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'orange': [[24, 255, 255], [10, 50, 70]],
               'gray': [[180, 18, 230], [0, 0, 40]]}
 
-imgB = cv2.imread('blue.png')
-imgG = cv2.imread('green.png')
+img = cv2.imread('green.png')
 
-hsvB = cv2.cvtColor(imgB, cv2.COLOR_BGR2HSV)
-hsvG = cv2.cvtColor(imgG, cv2.COLOR_BGR2HSV)
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 # Threshold of blue in HSV space
 # lower_blue = np.array([90, 50, 70])
@@ -26,19 +24,19 @@ hsvG = cv2.cvtColor(imgG, cv2.COLOR_BGR2HSV)
 # lower_green = np.array()
 # upper_green = np.array()
 
+print(color_dict_HSV['green'][1])
 # preparing the mask to overlay
-mask = cv2.inRange(hsvB, color_dict_HSV['blue'][1], color_dict_HSV['blue'][0])
-maskG = cv2.inRange(hsvG, color_dict_HSV['green'][1], color_dict_HSV['green'][0])
+mask = cv2.inRange(hsv, np.array(color_dict_HSV['green'][1]), np.array(color_dict_HSV['green'][0]))
     
 # The black region in the mask has the value of 0,
 # so when multiplied with original image removes all non-blue regions
-result = cv2.bitwise_and(imgG, imgG, mask = maskG)
+result = cv2.bitwise_and(img, img, mask = mask)
 
-aug = imgG
+aug = img
 
-aug[maskG != 0] = [0,255,0]
+aug[mask != 0] = [0,255,0]
 
-cv2.imshow('frame', imgG)
+cv2.imshow('frame', img)
 cv2.waitKey(0)
 cv2.imshow('result', result)
 cv2.waitKey(0)
