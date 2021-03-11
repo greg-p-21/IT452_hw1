@@ -10,7 +10,7 @@ class Filter:
         'yellow': [[35, 255, 255], [25, 50, 70]],
         'purple': [[158, 255, 255], [129, 50, 70]]
     }
-    
+
     RGB_COLORS = {
         'red': [0,0,255],
         'green': [0,255,0],
@@ -27,12 +27,12 @@ class Filter:
 
         mask = None
         if color == 'red':
-            mask1 = cv2.inRange(hsv, np.array(HSV_COLOR_RANGE['red1'][1]), np.array(HSV_COLOR_RANGE['red1'][0]))
-            mask2 = cv2.inRange(hsv, np.array(HSV_COLOR_RANGE['red2'][1]), np.array(HSV_COLOR_RANGE['red2'][0]))
+            mask1 = cv2.inRange(hsv, np.array(HSV_COLOR_RANGES['red1'][1]), np.array(HSV_COLOR_RANGES['red1'][0]))
+            mask2 = cv2.inRange(hsv, np.array(HSV_COLOR_RANGES['red2'][1]), np.array(HSV_COLOR_RANGES['red2'][0]))
 
             mask = mask1+mask2
         else:
-            mask = cv2.inRange(hsv, np.array(HSV_COLOR_RANGE[color][1]), np.array(HSV_COLOR_RANGE[color][0]))
+            mask = cv2.inRange(hsv, np.array(HSV_COLOR_RANGES[color][1]), np.array(HSV_COLOR_RANGES[color][0]))
             
         # The black region in the mask has the value of 0,
         # so when multiplied with original image removes all non-blue regions
