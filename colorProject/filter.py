@@ -27,18 +27,18 @@ class Filter:
 
         mask = None
         if color == 'red':
-            lower_red1 = np.array(self.HSV_COLOR_RANGES['red1'][1])
-            upper_red1 = np.array(self.HSV_COLOR_RANGES['red1'][0])
+            lower_red1 = np.array(Filter.HSV_COLOR_RANGES['red1'][1])
+            upper_red1 = np.array(Filter.HSV_COLOR_RANGES['red1'][0])
 
-            lower_red2 = np.array(self.HSV_COLOR_RANGES['red2'][1])
-            upper_red2 = np.array(self.HSV_COLOR_RANGES['red2'][0])
+            lower_red2 = np.array(Filter.HSV_COLOR_RANGES['red2'][1])
+            upper_red2 = np.array(Filter.HSV_COLOR_RANGES['red2'][0])
 
             mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
             mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
-            mask = mask1+mask2
+            mask = mask1 + mask2
         else:
-            lower = np.array(self.HSV_COLOR_RANGES[color][1])
-            upper = np.array(self.HSV_COLOR_RANGES[color][0])
+            lower = np.array(Filter.HSV_COLOR_RANGES[color][1])
+            upper = np.array(Filter.HSV_COLOR_RANGES[color][0])
             mask = cv2.inRange(hsv, lower, upper)
             
         # The black region in the mask has the value of 0,
@@ -46,7 +46,7 @@ class Filter:
         # result = cv2.bitwise_and(img, img, mask = mask)
 
 
-        img[mask != 0] = self.RGB_COLORS[color]
+        img[mask != 0] = Filter.RGB_COLORS[color]
 
         return img
 
