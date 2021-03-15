@@ -47,29 +47,46 @@ class Filter:
 
     @staticmethod
     def get_PID_value(filtered_img, color):
+        num_ys = len(filtered_img[0])
+        num_xs = len(filtered_img)
+        rgb_color = np.asarray(Filter.RGB_COLORS[color])
+
         color_columns = []
+        max_column = 0
         # print(f_img)
-        for y in range(len(filtered_img[0])):
+        for y in range(num_ys):
             amount = 0
-            for x in range(len(filtered_img)):
-                print(type(filtered_img[x,y]))
-                print(filtered_img[x,y][0])
-                if (filtered_img[x,y] == np.asarray(Filter.RGB_COLORS[color])).all():
+            for x in range(num_xs):
+                # print(type(filtered_img[x,y]))
+                # print(filtered_img[x,y][0])
+                if (filtered_img[x,y] == rgb_color).all():
                     amount = amount + 1
+
             color_columns.append(amount)
-        
-        return color_columns
+            if (amount > color_columns[max_column]):
+                max_column = y
+        print(max_column)
+
+        return y - rang(len(filtered))
         
 
 
 
 if __name__ == '__main__':
-    colors = ['red', 'blue', 'green', 'purple', 'yellow']
+    # colors = ['red', 'blue', 'green', 'purple', 'yellow']
 
-    for c in colors:
-        name = c + '.png'
-        f_img = Filter.get_filtered(name, c)
-        print(c)
-        print(Filter.get_PID_value(f_img, c))
-        cv2.imshow(c, f_img)
-        cv2.waitKey(0)
+    # for c in colors:
+    #     name = c + '.png'
+    #     f_img = Filter.get_filtered(name, c)
+    #     print(c)
+    #     print(Filter.get_PID_value(f_img, c))
+    #     cv2.imshow(c, f_img)
+    #     cv2.waitKey(0)
+
+    color = 'green'
+    pictures = ['left.png', 'center.png', 'right.png']
+    for p in pictures:
+        f_img = Filter.get_filtered(p, color)
+        print(p)
+        pid_val = Filter.get_PID_value(f_img, color)
+        print(pid_val)
