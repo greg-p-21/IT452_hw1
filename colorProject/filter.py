@@ -53,6 +53,7 @@ class Filter:
 
         color_columns = []
         max_column = 0
+        max_amount = 0
         # print(f_img)
         for y in range(num_ys):
             amount = 0
@@ -65,9 +66,10 @@ class Filter:
             color_columns.append(amount)
             if (amount > color_columns[max_column]):
                 max_column = y
+                max_amount = amount
         # print(max_column)
 
-        return max_column - num_ys/2
+        return (max_column - num_ys/2) * max_amount
         
 
 
@@ -84,7 +86,7 @@ if __name__ == '__main__':
     #     cv2.waitKey(0)
 
     color = 'green'
-    pictures = ['left.png', 'center.png', 'right.png']
+    pictures = ['left.png', 'center.png', 'right.png', 'nothing.png']
     for p in pictures:
         f_img = Filter.get_filtered(p, color)
         print(p)
