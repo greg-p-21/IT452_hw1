@@ -85,8 +85,8 @@ if __name__ == '__main__':
     #     cv2.imshow(c, f_img)
     #     cv2.waitKey(0)
 
-    color = 'green'
-    pictures = ['left.png', 'center.png', 'right.png', 'nothing.png']
+    color = 'red'
+    pictures = ['nothing.png']
     for p in pictures:
         f_img = Filter.get_filtered(p, color)
         print(p)
