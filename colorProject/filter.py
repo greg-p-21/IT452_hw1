@@ -65,9 +65,9 @@ class Filter:
             color_columns.append(amount)
             if (amount > color_columns[max_column]):
                 max_column = y
-        print(max_column)
+        # print(max_column)
 
-        return y - num_ys
+        return max_column - num_ys/2
         
 
 
