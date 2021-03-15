@@ -48,13 +48,13 @@ class Filter:
     @staticmethod
     def get_PID_value(filtered_img, color):
         color_columns = []
-        print(f_img)
+        # print(f_img)
         for y in range(len(filtered_img[0])):
             amount = 0
             for x in range(len(filtered_img)):
                 print(type(filtered_img[x,y]))
                 print(filtered_img[x,y][0])
-                if filtered_img[x,y].all() == Filter.RGB_COLORS[color].all():
+                if (filtered_img[x,y] == np.asarray(Filter.RGB_COLORS[color])).all():
                     amount = amount + 1
             color_columns.append(amount)
         
