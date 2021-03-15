@@ -45,11 +45,28 @@ class Filter:
 
         return img
 
+    def getPIDValue(filtered_img, color):
+        color_columns = []
+
+        for y in range(len(filtered_img[0])):
+            amount = 0
+            for x in range(len(filtered_img)):
+                if filtered_img[x][y] == Filter.RGB_COLORS[color]:
+                    amount = amount + 1
+            color_columns.append(amount)
+        
+        return color_columns
+        
+
+
+
 if __name__ == '__main__':
     colors = ['red', 'blue', 'green', 'purple', 'yellow']
 
     for c in colors:
         name = c + '.png'
         f_img = Filter.get_filtered(name, c)
+        print(color)
+        print(Filter.getPIDValue(f_img, c))
         cv2.imshow(c, f_img)
         cv2.waitKey(0)
