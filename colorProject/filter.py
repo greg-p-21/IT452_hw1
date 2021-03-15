@@ -52,7 +52,8 @@ class Filter:
         for y in range(len(filtered_img[0])):
             amount = 0
             for x in range(len(filtered_img)):
-                print(filtered_img[x,y])
+                print(type(filtered_img[x,y]))
+                print(filtered_img[x,y][0])
                 if filtered_img[x,y].all() == Filter.RGB_COLORS[color].all():
                     amount = amount + 1
             color_columns.append(amount)
