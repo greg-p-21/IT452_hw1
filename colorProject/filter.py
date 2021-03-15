@@ -45,13 +45,13 @@ class Filter:
 
         return img
 
-    def getPIDValue(filtered_img, color):
+    def get_PID_value(filtered_img, color):
         color_columns = []
-
+        print(f_img)
         for y in range(len(filtered_img[0])):
             amount = 0
             for x in range(len(filtered_img)):
-                if filtered_img[x][y] == Filter.RGB_COLORS[color]:
+                if filtered_img[x,y] == Filter.RGB_COLORS[color]:
                     amount = amount + 1
             color_columns.append(amount)
         
@@ -67,6 +67,6 @@ if __name__ == '__main__':
         name = c + '.png'
         f_img = Filter.get_filtered(name, c)
         print(c)
-        print(Filter.getPIDValue(f_img, c))
+        print(Filter.get_PID_value(f_img, c))
         cv2.imshow(c, f_img)
         cv2.waitKey(0)
