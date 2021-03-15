@@ -66,7 +66,7 @@ if __name__ == '__main__':
     for c in colors:
         name = c + '.png'
         f_img = Filter.get_filtered(name, c)
-        print(color)
+        print(c)
         print(Filter.getPIDValue(f_img, c))
         cv2.imshow(c, f_img)
         cv2.waitKey(0)
