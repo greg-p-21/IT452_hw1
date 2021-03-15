@@ -45,6 +45,7 @@ class Filter:
 
         return img
 
+    @staticmethod
     def get_PID_value(filtered_img, color):
         color_columns = []
         print(f_img)
