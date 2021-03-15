@@ -67,7 +67,7 @@ class Filter:
                 max_column = y
         print(max_column)
 
-        return y - rang(len(filtered))
+        return y - num_ys
         
 
 
