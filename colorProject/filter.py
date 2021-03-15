@@ -69,7 +69,7 @@ class Filter:
                 max_amount = amount
         # print(max_column)
 
-        return (max_column - num_ys/2) * max_amount
+        return (max_column - num_ys/2), max_amount
         
 
 
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     #     cv2.waitKey(0)
 
     color = 'red'
-    pictures = ['nothing.png']
+    pictures = ['redr.png', 'red.png', 'redr.png', 'nothing.png']
     for p in pictures:
         f_img = Filter.get_filtered(p, color)
         print(p)
