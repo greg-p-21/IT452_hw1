@@ -52,7 +52,7 @@ class Filter:
         for y in range(len(filtered_img[0])):
             amount = 0
             for x in range(len(filtered_img)):
-                if filtered_img[x,y] == Filter.RGB_COLORS[color]:
+                if filtered_img[x,y].all() == Filter.RGB_COLORS[color].all():
                     amount = amount + 1
             color_columns.append(amount)
         
