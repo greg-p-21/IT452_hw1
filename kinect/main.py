@@ -45,7 +45,8 @@ try:
         
         cv2.imshow("Filtered Image", f_img)
         cv2.imshow("Depth",dpth)
-        cv2.waitKey(1)
+        print(dpth)
+        cv2.waitKey(0)
 
         curr = curr_tup[0]
         detected = curr_tup[1]
