@@ -85,7 +85,7 @@ if __name__ == "__main__":
     imgs = ['left.png', 'right.png']
     for name in imgs:
         img = cv2.imread(name)
-        f_img = Filter.get_filtered(img, 'green')
+    	f_img = Filter.get_filtered(img, 'green')
 		cv2.imshow("f_img", f_img)
 		cv2.waitKey(0)
         print(name)
