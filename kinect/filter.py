@@ -46,23 +46,47 @@ class Filter:
 
     @staticmethod
     def get_PID_value(filtered_img, color):
-        num_ys = len(filtered_img[0])
-        num_xs = len(filtered_img)
+        # num_ys = len(filtered_img[0])
+        num_columns = len(filtered_img[0])
+        # num_xs = len(filtered_img)
         rgb_color = np.asarray(Filter.RGB_COLORS[color])
 
-        color_columns = []
-        max_column = 0
-        max_amount = 0
-        # print(f_img)
-        for y in range(num_ys):
-            amount = 0
-            for x in range(num_xs):
-                if (filtered_img[x,y] == rgb_color).all():
-                    amount = amount + 1
+        # color_columns = []
+        # max_column = 0
+        # max_amount = 0
 
-            color_columns.append(amount)
-            if (amount > color_columns[max_column]):
-                max_column = y
-                max_amount = amount
+        # # print(f_img)
+        # for y in range(num_ys):
+        #     amount = 0
+        #     for x in range(num_xs):
+        #         if (filtered_img[x,y] == rgb_color).all():
+        #             amount = amount + 1
 
-        return (num_ys/2 - max_column), max_amount
+        #     color_columns.append(amount)
+        #     if (amount > color_columns[max_column]):
+        #         max_column = y
+        #         max_amount = amount        
+
+        # return (num_ys/2 - max_column), max_amount
+        
+        # count number of colored pixels in columns 
+        color_columns = np.count_nonzero((filtered_img == rgb_color).all(), axis=0)
+
+        # find largest location
+        max_column = np.argmax(color_columns)
+
+        # largest value
+        max_amount = color_columns[max_column]
+
+        return (num_columns/2 - max_column), max_amount
+
+
+if __name__ == "__main__":
+    imgs = ['left.png', 'right.png']
+    for name in imgs:
+        img = cv2.imread(name)
+        f_img = Filter.get_filtered(img, 'green')
+        print(name)
+        print(Filter.get_PID_value(f_img, 'green'))
+    
+    print("done")
