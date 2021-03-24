@@ -19,7 +19,7 @@ class Filter:
         'yellow': [0,255,255]
     }
 
-    def __init__(self, img, color="blue", depth, gradient=5):
+    def __init__(self, img, color, depth, gradient=5):
         self.img = img
         self.color = color
         self.depth = depth/gradient
