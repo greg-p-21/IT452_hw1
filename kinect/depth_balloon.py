@@ -10,13 +10,10 @@ MAX_DISTANCE = 0.17
 ANGLE_SPEED = 0.2
 LINEAR_SPEED = 0.3
 
-try:
+def getColor():
     # start robot and ask for color
     colors = ['red', 'blue', 'green', 'purple', 'yellow']
-    print("creating robot")
-    r = robot()
     color = raw_input("Choose your color: ")
-    found = False
 
     if color not in colors:
         print("Please choose from one of the following colors (case sensitive):\n")
@@ -25,8 +22,18 @@ try:
     if color not in colors:
         exit(1)
 
+    return color
+
+try:
+    # start robot and ask for color
+    print("creating robot")
+    r = robot()
+    found = False
+    color = getColor()
+
     #create pid controller
     pid = PID(kp=.0006, ki=.00006, kd=.001)
+    
     while not rospy.is_shutdown():
         # get image and depth info
         img = r.getImage()
@@ -46,7 +53,7 @@ try:
 
         # make sure there is enough of the color there
         if num_detected > THRESHOLD:
-            pid_speed = pid(loc_val)
+            pid_angSpeed = pid(loc_val)
             # print(pid.components)
             found = True
         else:
@@ -56,10 +63,11 @@ try:
         if mean_distance < MAX_DISTANCE:
             r.drive(angSpeed=0, linSpeed=0)
             print("arrived")
+            rospy.signal_shutdown("made it to balloon")
         elif not found: # Balloon not in view
             r.drive(angSpeed=ANGLE_SPEED, linSpeed=0)
         else: # Correct Balloon in image 
-            r.drive(angSpeed=pid_speed, linSpeed=LINEAR_SPEED)
+            r.drive(angSpeed=pid_angSpeed, linSpeed=LINEAR_SPEED)
         time.sleep(0.1)
 
 except Exception as e:
