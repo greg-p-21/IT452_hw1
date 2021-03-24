@@ -18,14 +18,19 @@ class PID:
         ki=0.0, 
         kd=0.0, 
         setpoint=0, 
-        output_limits=(None, None)
+        output_limits=(None, None),
+        num_errors=10
     ):
         self.kp, self.ki, self.kd = kp, ki, kd
         self.setpoint = setpoint
+        self.num_errors = num_errors
+
+        self.errors = []
 
         self._proportional = 0
         self._integral = 0
         self._derivative = 0
+
 
         self._last_output = None
         self._last_input = None
@@ -41,7 +46,8 @@ class PID:
         self._proportional = self.kp * error
 
         # compute integral
-        self._integral += self.ki * error
+        error_sum = sum(self.errors[-self.num_errors:]) if (len(self.errors) > self.num_errors) else sum(self.errors)
+        self._integral = self.ki * error_sum
         self._integral = _clamp(self._integral, self.output_limits)
 
         # compute derivative 
@@ -53,6 +59,7 @@ class PID:
         output = _clamp(output, self.output_limits)
         
         # keep track 
+        self.errors.append(error)
         self._last_output = output
         self._last_input = input_
 
