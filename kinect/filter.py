@@ -20,8 +20,7 @@ class Filter:
     }
 
     @staticmethod
-    def get_filtered(img, color):
-
+    def get_mask(img, color):
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         mask = None
@@ -40,16 +39,19 @@ class Filter:
             upper = np.array(Filter.HSV_COLOR_RANGES[color][0])
             mask = cv2.inRange(hsv, lower, upper)
 
+        return mask
+
+
+    @staticmethod
+    def get_filtered(img, color):
+        mask = Filter.get_mask(img, color)
         img[mask != 0] = Filter.RGB_COLORS[color]
-        print("mask", mask[0:20])
         return img
 
     @staticmethod
-    def get_PID_value(filtered_img, color):
+    def get_PID_value(mask, color):
         # num_ys = len(filtered_img[0])
-        num_columns = len(filtered_img[0])
         # num_xs = len(filtered_img)
-        rgb_color = np.asarray(Filter.RGB_COLORS[color])
 
         # color_columns = []
         # max_column = 0
@@ -71,8 +73,8 @@ class Filter:
         
         # count number of colored pixels in columns 
         # print(filtered_img == rgb_color)
-        print(filtered_img.shape)
-        color_columns = np.count_nonzero(filtered_img == rgb_color, axis=1)
+        # print(filtered_img.shape)
+        color_columns = np.count_nonzero(mask, axis=0)
         print(color_columns)
 
         # find largest location
@@ -81,6 +83,9 @@ class Filter:
         # largest value
         max_amount = color_columns[max_column]
 
+        # number of columns
+        num_columns = len(mask[0])
+
         return (num_columns/2 - max_column), max_amount
 
 
@@ -88,9 +93,9 @@ if __name__ == "__main__":
     imgs = ['left.png', 'right.png']
     for name in imgs:
         img = cv2.imread(name)
-    	f_img = Filter.get_filtered(img, 'green')
-        cv2.imshow("f_img", f_img)
-        cv2.waitKey(0)
+    	mask = Filter.get_mask(img, 'green')
+        # cv2.imshow("f_img", f_img)
+        # cv2.waitKey(0)
         print(name)
         print(Filter.get_PID_value(f_img, 'green'))
     
