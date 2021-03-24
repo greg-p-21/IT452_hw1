@@ -1,26 +1,10 @@
 import cv2
-import numpy as np
 import rospy,time,tf
-from turtleAPI import robot
 
+from turtleAPI import robot
 from filter import Filter
 from pid import PID
 
-# def PID_img(curr_img, end_img, prev_img):
-#     Kp = 0.0006
-#     Ekp = Kp*curr_img
-
-#     Ki = 0.0
-#     Eki = 0
-#     for i in range(0,len(prev_img)):
-#         Eki += prev_img[i]
-#     Eki = Ki*Eki
-
-#     Kd = 0
-#     Ekd = curr_img - prev_img[len(prev_img)-2]
-#     Ekd = Kd*Ekd
-
-#     return Ekp + Eki + Ekd
 
 try:
     colors = ['red', 'blue', 'green', 'purple', 'yellow']
@@ -28,7 +12,6 @@ try:
     r = robot()
     color = raw_input("Choose your color: ")
     found = False
-    # popped = False
 
     if color not in colors:
         print("Please choose from one of the following colors (case sensitive):\n")
@@ -38,7 +21,7 @@ try:
         exit(1)
 
     # prev_img = []
-    pid = PID(kp=.0006, ki=.0001, kd=.0001)
+    pid = PID(kp=.0006, ki=.0001, kd=.001)
     while not rospy.is_shutdown():
         img = r.getImage()
         depth=r.getDepth()
@@ -53,10 +36,8 @@ try:
         cv2.waitKey(1)
 
         if num_detected > 30:
-            # prev_img.append(loc_val)
             pid_speed = pid(loc_val)
             print(pid.components)
-            # print(pid_speed)
             found = True
         else:
             found = False

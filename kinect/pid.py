@@ -19,7 +19,7 @@ class PID:
         self.reset()
 
     def __call__(self, input_):
-        # compute error terms
+        # compute error term
         error = self.setpoint - input_ 
 
         # compute proportional
@@ -39,6 +39,7 @@ class PID:
         # keep track 
         self._last_output = output
         self._last_input = input_
+        self._prev_errors.append(input_)
 
         return output 
 
