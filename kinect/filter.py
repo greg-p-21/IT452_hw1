@@ -76,6 +76,7 @@ class Filter:
         # print(filtered_img.shape)
         color_columns = np.count_nonzero(mask, axis=0)
         print(color_columns)
+        print(color_columns.shape)
 
         # find largest location
         max_column = np.argmax(color_columns)
@@ -94,6 +95,7 @@ if __name__ == "__main__":
     for name in imgs:
         img = cv2.imread(name)
     	mask = Filter.get_mask(img, 'green')
+        print(mask)
         # cv2.imshow("f_img", f_img)
         # cv2.waitKey(0)
         print(name)
