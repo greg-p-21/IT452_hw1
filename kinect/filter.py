@@ -41,7 +41,7 @@ class Filter:
             mask = cv2.inRange(hsv, lower, upper)
 
         img[mask != 0] = Filter.RGB_COLORS[color]
-
+        print("mask", mask[0:20])
         return img
 
     @staticmethod
@@ -72,7 +72,7 @@ class Filter:
         # count number of colored pixels in columns 
         # print(filtered_img == rgb_color)
         print(filtered_img.shape)
-        color_columns = np.count_nonzero(filtered_img == rgb_color, axis=1 )
+        color_columns = np.count_nonzero(filtered_img == rgb_color, axis=1)
         print(color_columns)
 
         # find largest location
