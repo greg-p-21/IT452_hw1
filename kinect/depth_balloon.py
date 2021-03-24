@@ -6,7 +6,7 @@ from filter import Filter
 
 
 def PID_img(curr_img, end_img, prev_img):
-    Kp = 0.0003
+    Kp = 0.0006
     Ekp = Kp*curr_img
 
     Ki = 0.0
@@ -58,7 +58,7 @@ try:
         else:
             found = False
 
-        if mean_distance < .1:
+        if mean_distance < .17:
             r.drive(angSpeed=0, linSpeed=0)
             print("arrived")
         elif not found:
