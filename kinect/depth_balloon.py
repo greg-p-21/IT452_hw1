@@ -33,7 +33,7 @@ try:
 
     #create pid controller
     limits = -.3, .3
-    pid = PID(kp=.0006, ki=.00006, kd=.001, output_limits=limits)
+    pid = PID(kp=.001, ki=.0001, kd=.001, output_limits=limits)
     
     while not rospy.is_shutdown():
         # get image and depth info
