@@ -44,9 +44,9 @@ try:
         depth=r.getDepth()
         flter = Filter(img, color, depth)
 
-        f_img = flter.get_filtered()
-        loc_val, num_detected = flter.get_PID_value()
-        mean_distance = flter.mean_distance()
+        f_img = flter.get_filtered
+        loc_val, num_detected = flter.get_PID_value
+        mean_distance = flter.mean_distance
         print("distance", mean_distance)
 
         cv2.imshow("Filtered Image", f_img)

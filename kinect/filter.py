@@ -18,14 +18,14 @@ class Filter:
         'purple': [255,0,255],
         'yellow': [0,255,255]
     }
-    GRADIENT = 5
 
-    def __init__(self, img, color, depth):
+    def __init__(self, img, color="blue", depth, gradient=5):
         self.img = img
         self.color = color
-        self.depth = depth/Filter.GRADIENT
-        self.mask = self.get_mask()
+        self.depth = depth/gradient
+        self.mask = self.get_mask
 
+    @property
     def get_mask(self):
         hsv = cv2.cvtColor(self.img, cv2.COLOR_BGR2HSV)
 
@@ -47,27 +47,30 @@ class Filter:
 
         return mask
 
+    @property
     def get_filtered(self):
-        # self.mask = Filter.get_mask(img, color)
         self.img[self.mask != 0] = Filter.RGB_COLORS[self.color]
         return self.img
 
+    @property
     def get_PID_value(self):
         mask_T = self.mask.T
         col_count = []
-
+        # count how many color pixels are in each column
         for col in mask_T:
             col_count.append(np.count_nonzero(col))
 
         # find largest location
         max_column = np.argmax(col_count)
+
         # largest value
         max_amount = col_count[max_column]
-        # number of columns
-        num_columns = len(mask_T)
+        # distance from center
+        offset = max_column - len(mask_T)/2
 
-        return (num_columns/2 - max_column), max_amount
+        return offset, max_amount
 
+    @property
     def mean_distance(self):
         return np.nanmean(self.depth[self.mask != 0])
 
