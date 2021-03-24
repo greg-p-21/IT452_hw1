@@ -97,6 +97,6 @@ if __name__ == "__main__":
         # cv2.imshow("f_img", f_img)
         # cv2.waitKey(0)
         print(name)
-        print(Filter.get_PID_value(f_img, 'green'))
+        print(Filter.get_PID_value(mask, 'green'))
     
     print("done")
