@@ -21,7 +21,7 @@ try:
         exit(1)
 
     # prev_img = []
-    pid = PID(kp=.0006, ki=.0001, kd=.001)
+    pid = PID(kp=.0006, ki=.00006, kd=.001)
     while not rospy.is_shutdown():
         img = r.getImage()
         depth=r.getDepth()
