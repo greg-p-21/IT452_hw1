@@ -62,7 +62,7 @@ try:
         else:
             found = False
 
-        if mean_distance < .4:
+        if mean_distance < .15:
             r.drive(angSpeed=0, linSpeed=0)
             print("arrived")
         elif not found:
