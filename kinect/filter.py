@@ -27,7 +27,7 @@ class Filter:
         self.mask = self.get_mask()
 
     def get_mask(self):
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(self.img, cv2.COLOR_BGR2HSV)
 
         mask = None
         if self.color == 'red':
@@ -49,8 +49,8 @@ class Filter:
 
     def get_filtered(self):
         # self.mask = Filter.get_mask(img, color)
-        img[self.mask != 0] = Filter.RGB_COLORS[self.color]
-        return img
+        self.img[self.mask != 0] = Filter.RGB_COLORS[self.color]
+        return self.img
 
     def get_PID_value(self):
         mask_T = self.mask.T
