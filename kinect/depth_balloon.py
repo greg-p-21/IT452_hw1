@@ -44,7 +44,7 @@ try:
         curr_tup = Filter.get_PID_value(mask)
 
         mean_distance = np.nanmean(depth[mask != 0])
-        print(mean_distance)
+        print("distance", mean_distance)
 
         cv2.imshow("Filtered Image", f_img)
         # cv2.imshow("Depth",dpth)
