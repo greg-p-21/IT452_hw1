@@ -34,7 +34,7 @@ class PID:
         self._derivative = self.kd * d_input
 
         # compute final output
-        output = self._proportional + self.integral + self._derivative
+        output = self._proportional + self._integral + self._derivative
         
         # keep track 
         self._last_output = output
@@ -59,3 +59,12 @@ class PID:
 
         self._last_output = None
         self._last_input = None
+
+if __name__ == "__main__":
+    pid = PID()
+    pid(5)
+    print(pid.components)
+    pid(3)
+    print(pid.components)
+    pid(1)
+    print(pid.components)
