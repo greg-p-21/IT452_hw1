@@ -70,8 +70,8 @@ class Filter:
         # return (num_ys/2 - max_column), max_amount
         
         # count number of colored pixels in columns 
-        print(filtered_img == rgb_color)
-        color_columns = np.count_nonzero((filtered_img == rgb_color).all(), axis=0)
+        # print(filtered_img == rgb_color)
+        color_columns = np.count_nonzero(filtered_img == rgb_color, axis=0)
 
         # find largest location
         max_column = np.argmax(color_columns)
