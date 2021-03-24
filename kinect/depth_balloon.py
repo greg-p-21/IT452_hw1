@@ -39,10 +39,13 @@ try:
     prev_img = []
     while not popped and not rospy.is_shutdown():
         img = r.getImage()
-        dpth=r.getDepth()
+        depth=r.getDepth()/5
         f_img, mask = Filter.get_filtered(img, color)
-        curr_tup = Filter.get_PID_value(mask, color)
-        
+        curr_tup = Filter.get_PID_value(mask)
+
+        mean_distance = np.nanmean(depth[mask != 0])
+        print(mean_distance)
+
         cv2.imshow("Filtered Image", f_img)
         # cv2.imshow("Depth",dpth)
         # print(dpth)
@@ -59,7 +62,9 @@ try:
         else:
             found = False
 
-        if not found:
+        if mean_distance < .5:
+            rospy.signal_shutdown("arrived at balloon") 
+        elif not found:
             r.drive(angSpeed=0.2, linSpeed=0)
         else:
             r.drive(angSpeed=pid_speed, linSpeed=0.3)

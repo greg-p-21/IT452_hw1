@@ -57,12 +57,7 @@ class augment:
     
     #switches the mask from being row based to being column based
     def switch(self, n):
-        aug = []
-        for i in range(640):
-            aug.append([])
-            for j in range(480):
-                aug[i].append(n[j][i])
-        return aug
+        return n.T
 
     def median(self):
         return

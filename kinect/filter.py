@@ -49,41 +49,12 @@ class Filter:
         return img, mask
 
     @staticmethod
-    def get_PID_value(mask, color):
-        # num_ys = len(filtered_img[0])
-        # num_xs = len(filtered_img)
-
-        # color_columns = []
-        # max_column = 0
-        # max_amount = 0
-
-        # # print(f_img)
-        # for y in range(num_ys):
-        #     amount = 0
-        #     for x in range(num_xs):
-        #         if (filtered_img[x,y] == rgb_color).all():
-        #             amount = amount + 1
-
-        #     color_columns.append(amount)
-        #     if (amount > color_columns[max_column]):
-        #         max_column = y
-        #         max_amount = amount        
-
-        # return (num_ys/2 - max_column), max_amount
-        
-        # count number of colored pixels in columns 
-        # print(filtered_img == rgb_color)
-        # print(filtered_img.shape)
+    def get_PID_value(mask):
         mask_T = mask.T
         col_count = []
 
         for col in mask_T:
             col_count.append(np.count_nonzero(col))
-
-        # color_columns = np.count_nonzero(mask, axis=0)
-        # print(color_columns)
-        # print(color_columns.shape)
-        print(col_count)
 
         # find largest location
         max_column = np.argmax(col_count)

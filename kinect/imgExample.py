@@ -13,9 +13,10 @@ try:
     grad = depth/5
     #switches rows and columns
     s = a.switch(grad) #col by row
-
+    print("depth", s)
     
     img=r.getImage()
+    print("img", img.T)
     cv2.imshow("Depth",grad)
     cv2.imshow("Image",img)
     cv2.waitKey(1)
