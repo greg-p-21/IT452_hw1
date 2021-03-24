@@ -39,7 +39,7 @@ class PID:
         # keep track 
         self._last_output = output
         self._last_input = input_
-        self._prev_errors.append(input_)
+        self._prev_errors.append(error)
 
         return output 
 
