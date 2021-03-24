@@ -27,7 +27,7 @@ try:
     r = robot()
     color = raw_input("Choose your color: ")
     found = False
-    popped = False
+    # popped = False
 
     if color not in colors:
         print("Please choose from one of the following colors (case sensitive):\n")
@@ -37,26 +37,22 @@ try:
         exit(1)
 
     prev_img = []
-    while not popped and not rospy.is_shutdown():
+    while not rospy.is_shutdown():
         img = r.getImage()
-        depth=r.getDepth()/5
-        f_img, mask = Filter.get_filtered(img, color)
-        curr_tup = Filter.get_PID_value(mask)
+        depth=r.getDepth()
+        flter = Filter(img, color, depth)
 
-        mean_distance = np.nanmean(depth[mask != 0])
+        f_img = flter.get_filtered()
+        loc_val, num_detected = flter.get_PID_value()
+        mean_distance = flter.mean_distance()
         print("distance", mean_distance)
 
         cv2.imshow("Filtered Image", f_img)
-        # cv2.imshow("Depth",dpth)
-        # print(dpth)
         cv2.waitKey(1)
 
-        curr = curr_tup[0]
-        detected = curr_tup[1]
-
-        if detected > 30:
-            prev_img.append(curr)
-            pid_speed = PID_img(curr, 0, prev_img)
+        if num_detected > 30:
+            prev_img.append(loc_val)
+            pid_speed = PID_img(loc_val, 0, prev_img)
             print(pid_speed)
             found = True
         else:

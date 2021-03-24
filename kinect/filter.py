@@ -18,13 +18,19 @@ class Filter:
         'purple': [255,0,255],
         'yellow': [0,255,255]
     }
+    GRADIENT = 5
 
-    @staticmethod
-    def get_mask(img, color):
+    def __init__(self, img, color, depth):
+        self.img = img
+        self.color = color
+        self.depth = depth/Filter.GRADIENT
+        self.mask = self.get_mask()
+
+    def get_mask(self):
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         mask = None
-        if color == 'red':
+        if self.color == 'red':
             lower_red1 = np.array(Filter.HSV_COLOR_RANGES['red1'][1])
             upper_red1 = np.array(Filter.HSV_COLOR_RANGES['red1'][0])
 
@@ -35,22 +41,19 @@ class Filter:
             mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
             mask = mask1 + mask2
         else:
-            lower = np.array(Filter.HSV_COLOR_RANGES[color][1])
-            upper = np.array(Filter.HSV_COLOR_RANGES[color][0])
+            lower = np.array(Filter.HSV_COLOR_RANGES[self.color][1])
+            upper = np.array(Filter.HSV_COLOR_RANGES[self.color][0])
             mask = cv2.inRange(hsv, lower, upper)
 
         return mask
 
+    def get_filtered(self):
+        # self.mask = Filter.get_mask(img, color)
+        img[self.mask != 0] = Filter.RGB_COLORS[self.color]
+        return img
 
-    @staticmethod
-    def get_filtered(img, color):
-        mask = Filter.get_mask(img, color)
-        img[mask != 0] = Filter.RGB_COLORS[color]
-        return img, mask
-
-    @staticmethod
-    def get_PID_value(mask):
-        mask_T = mask.T
+    def get_PID_value(self):
+        mask_T = self.mask.T
         col_count = []
 
         for col in mask_T:
@@ -58,14 +61,15 @@ class Filter:
 
         # find largest location
         max_column = np.argmax(col_count)
-
         # largest value
         max_amount = col_count[max_column]
-
         # number of columns
-        num_columns = len(mask[0])
+        num_columns = len(mask_T)
 
         return (num_columns/2 - max_column), max_amount
+
+    def mean_distance(self):
+        return np.nanmean(self.depth[self.mask != 0])
 
 
 if __name__ == "__main__":
