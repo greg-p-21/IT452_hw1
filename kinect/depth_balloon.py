@@ -55,7 +55,7 @@ try:
         if num_detected > 30:
             # prev_img.append(loc_val)
             pid_speed = pid(loc_val)
-            print(pid.components())
+            print(pid.components)
             # print(pid_speed)
             found = True
         else:
