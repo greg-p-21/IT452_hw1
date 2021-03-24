@@ -37,7 +37,7 @@ try:
 
         if num_detected > 30:
             pid_speed = pid(loc_val)
-            print(pid.components)
+            # print(pid.components)
             found = True
         else:
             found = False
