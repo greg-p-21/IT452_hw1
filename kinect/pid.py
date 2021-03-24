@@ -1,13 +1,27 @@
 # Gregory Polmatier
 # code derived from https://simple-pid.readthedocs.io/en/latest/_modules/simple_pid/PID.html#PID
 
+def _clamp(value, limits):
+    lower, upper = limits
+    if value is None:
+        return None
+    elif (upper is not None) and (value > upper):
+        return upper
+    elif (lower is not None) and (value < lower):
+        return lower
+    return value
+
 class PID:
-    def __init__(self, kp=1, ki=0, kd=0, setpoint=0, num_errors=10):
+    def __init__(
+        self, 
+        kp=1.0, 
+        ki=0.0, 
+        kd=0.0, 
+        setpoint=0, 
+        output_limits=(None, None)
+    ):
         self.kp, self.ki, self.kd = kp, ki, kd
         self.setpoint = setpoint
-        self.num_errors = num_errors
-
-        self._prev_errors = []
 
         self._proportional = 0
         self._integral = 0
@@ -16,6 +30,7 @@ class PID:
         self._last_output = None
         self._last_input = None
         
+        self.output_limits = output_limits
         self.reset()
 
     def __call__(self, input_):
@@ -26,8 +41,8 @@ class PID:
         self._proportional = self.kp * error
 
         # compute integral
-        error_sum = (sum(self._prev_errors[-self.num_errors:]) if (len(self._prev_errors) >= self.num_errors) else sum(self._prev_errors))
-        self._integral = self.ki * error_sum
+        self._integral += self.ki * error
+        self._integral = _clamp(self._integral, self.output_limits)
 
         # compute derivative 
         d_input = input_ - (self._last_input if (self._last_input is not None) else input_)
@@ -35,11 +50,11 @@ class PID:
 
         # compute final output
         output = self._proportional + self._integral + self._derivative
+        output = _clamp(output, self.output_limits)
         
         # keep track 
         self._last_output = output
         self._last_input = input_
-        self._prev_errors.append(error)
 
         return output 
 
