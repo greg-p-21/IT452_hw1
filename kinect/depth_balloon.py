@@ -55,7 +55,7 @@ try:
         # make sure there is enough of the color there
         if num_detected > THRESHOLD:
             pid_angSpeed = pid(loc_val)
-            # print(pid.components)
+            print(pid.components)
             found = True
         else:
             found = False
