@@ -74,15 +74,22 @@ class Filter:
         # count number of colored pixels in columns 
         # print(filtered_img == rgb_color)
         # print(filtered_img.shape)
-        color_columns = np.count_nonzero(mask, axis=0)
-        print(color_columns)
-        print(color_columns.shape)
+        mask_T = mask.T
+        col_count = []
+
+        for col in mask_T:
+            col_count.append(np.count_nonzero(col))
+
+        # color_columns = np.count_nonzero(mask, axis=0)
+        # print(color_columns)
+        # print(color_columns.shape)
+        print(col_count)
 
         # find largest location
-        max_column = np.argmax(color_columns)
+        max_column = np.argmax(col_count)
 
         # largest value
-        max_amount = color_columns[max_column]
+        max_amount = col_count[max_column]
 
         # number of columns
         num_columns = len(mask[0])
