@@ -62,8 +62,9 @@ try:
         else:
             found = False
 
-        if mean_distance < .5:
-            rospy.signal_shutdown("arrived at balloon") 
+        if mean_distance < .4:
+            r.drive(angSpeed=0, linSpeed=0)
+            print("arrived")
         elif not found:
             r.drive(angSpeed=0.2, linSpeed=0)
         else:
