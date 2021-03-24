@@ -46,7 +46,7 @@ class Filter:
     def get_filtered(img, color):
         mask = Filter.get_mask(img, color)
         img[mask != 0] = Filter.RGB_COLORS[color]
-        return img
+        return img, mask
 
     @staticmethod
     def get_PID_value(mask, color):
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     imgs = ['left.png', 'right.png']
     for name in imgs:
         img = cv2.imread(name)
-    	mask = Filter.get_mask(img, 'green')
+    	f_img, mask = Filter.get_mask(img, 'green')
         print(mask)
         # cv2.imshow("f_img", f_img)
         # cv2.waitKey(0)

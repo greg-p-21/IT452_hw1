@@ -40,12 +40,12 @@ try:
     while not popped and not rospy.is_shutdown():
         img = r.getImage()
         dpth=r.getDepth()
-        f_img = Filter.get_filtered(img, color)
-        curr_tup = Filter.get_PID_value(f_img, color)
+        f_img, mask = Filter.get_filtered(img, color)
+        curr_tup = Filter.get_PID_value(mask, color)
         
         cv2.imshow("Filtered Image", f_img)
-        cv2.imshow("Depth",dpth)
-        print(dpth)
+        # cv2.imshow("Depth",dpth)
+        # print(dpth)
         cv2.waitKey(1)
 
         curr = curr_tup[0]
