@@ -19,10 +19,10 @@ class Filter:
         'yellow': [0,255,255]
     }
 
-    def __init__(self, img, color, depth, gradient=5):
+    def __init__(self, img, color, depth=None, gradient=5):
         self.img = img
         self.color = color
-        self.depth = depth/gradient
+        self.depth = depth/gradient if (depth not None) else self.depth = None
         self.mask = self.get_mask
 
     @property
