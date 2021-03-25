@@ -79,11 +79,12 @@ if __name__ == "__main__":
     imgs = ['left.png', 'right.png']
     for name in imgs:
         img = cv2.imread(name)
-    	f_img, mask = Filter.get_mask(img, 'green')
+        f = Filter(img, 'green', depth=None)
+    	mask = f.get_mask
         print(mask)
         # cv2.imshow("f_img", f_img)
         # cv2.waitKey(0)
-        print(name)
-        print(Filter.get_PID_value(mask, 'green'))
+        # print(name)
+        # print(Filter.get_PID_value(mask, 'green'))
     
     print("done")
