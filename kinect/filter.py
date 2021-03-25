@@ -22,7 +22,11 @@ class Filter:
     def __init__(self, img, color, depth=None, gradient=5):
         self.img = img
         self.color = color
-        self.depth = depth/gradient if (depth not None) else self.depth = None
+        if depth == None:
+            self.depth = None
+        else:
+            self.depth = depth/gradient
+        # self.depth = depth/gradient if (depth not None) else self.depth = None
         self.mask = self.get_mask
 
     @property
