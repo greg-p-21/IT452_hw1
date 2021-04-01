@@ -119,12 +119,12 @@ def observe(rob,room,particles):
   #TODO
   # Weighting with multiple observations
   observations = rob.obs()
-  weight_sum = _weightParticles(particles, observations):
+  weight_sum = _weightParticles(particles, observations)
 
   # resample the weights and return
   return _resample(particles, weight_sum)
 
-def _weightParticles(particles, observations):\
+def _weightParticles(particles, observations):
   '''
   Returns the sum of the particles' weights using monte carlo localization
   '''
@@ -137,8 +137,7 @@ def _weightParticles(particles, observations):\
       if addend == 0:
         addend = 10**-15
       p.weight += log(addend)
-
-  for p in particles:
+    
     p.weight = exp(p.weight)
     sum_ += p.weight
 
@@ -151,7 +150,7 @@ def _resample(particles, weightsum):
   '''
   newParticles = []
   for i in range(len(particles)):
-    r = weightsum * random.random()
+    r = weightsum * np.random.random()
     samplesum = 0
     for p in particles:
       samplesum += p.weight 
