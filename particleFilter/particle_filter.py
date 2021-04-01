@@ -117,23 +117,50 @@ def observe(rob,room,particles):
   Return the list of new particles.
   '''
   #TODO
+  # Weighting with multiple observations
   observations = rob.obs()
-  sum = 0
+  weight_sum = _weightParticles(particles, observations):
+
+  # resample the weights and return
+  return _resample(particles, weight_sum)
+
+def _weightParticles(particles, observations):\
+  '''
+  Returns the sum of the particles' weights using monte carlo localization
+  '''
+  sum_ = 0
   for p in particles:
     p.weight=np.log(1)
     p_observations = p.obs()
     for o, op in zip(observations, p_observations):
-      addend = p.weight*normpdf(o - p.c_o*op, 0, p.sigma_o)
+      addend = normpdf(o - p.c_o*op, 0, p.sigma_o)
       if addend == 0:
         addend = 10**-15
-      p.weight = p.weight + np.log(addend)
-  for p in particles:
-    p.weight = np.exp(p.weight)
-    sum += p.weight
-  
+      p.weight += log(addend)
 
-      
-    
+  for p in particles:
+    p.weight = exp(p.weight)
+    sum_ += p.weight
+
+  return sum_
+
+def _resample(particles, weightsum):
+  '''
+  Resample the particles so the most likely are kept. 
+  Returns the list of new particles. 
+  '''
+  newParticles = []
+  for i in range(len(particles)):
+    r = weightsum * random.random()
+    samplesum = 0
+    for p in particles:
+      samplesum += p.weight 
+      if r <= samplesum:
+        newParticles.append(deepcopy(p))
+        break 
+  
+  return newParticles 
+
 
 def main():
   N=10000
