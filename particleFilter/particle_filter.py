@@ -143,13 +143,14 @@ def _weightParticles(particles, observations):
 
   return sum_
 
-def _resample(particles, weightsum):
+def _resample(particles, weightsum, N=10000):
   '''
   Resample the particles so the most likely are kept. 
   Returns the list of new particles. 
   '''
+
   newParticles = []
-  for i in range(len(particles)):
+  for i in range(N):
     r = weightsum * np.random.random()
     samplesum = 0
     for p in particles:
@@ -162,7 +163,7 @@ def _resample(particles, weightsum):
 
 
 def main():
-  N=10000
+  N=50000
   room=robot.Room()
   rob=robot.Robot(room,sigma_o=.3,sigma_l=.2,sigma_r=.1)
   particles = [Particle(room,sigma_o=.8,sigma_l=.2,sigma_r=.1) for i in range(N)]
