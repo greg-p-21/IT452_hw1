@@ -1,0 +1,10 @@
+graph G {
+  A [label = "(5.2,3.4)"];
+  infrontofHP114 [label = "(-3.5,2.1)"];
+  C [label = "(0,5.2)"];
+
+  A -- C;
+  infrontofHP114 -- C;
+}
+
+

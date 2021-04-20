@@ -148,7 +148,6 @@ def _resample(particles, weightsum, N=10000):
   Resample the particles so the most likely are kept. 
   Returns the list of new particles. 
   '''
-
   newParticles = []
   for i in range(N):
     r = weightsum * np.random.random()
