@@ -66,7 +66,7 @@ def GoTo(R, target, dist_pid, ang_pid):
         # self.distError(current, target)
 
         lspeed = -1* dist_pid(distError(current, target))
-        aspeed = ang_pid(angleError(current, target))
+        aspeed = -1* ang_pid(angleError(current, target))
 
         print("distance", distance)
         print("dist and angle pid", (lspeed, aspeed))
@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
         print(route, points)
         
-        distPID = PID(kp = .05, output_limits=(-.3, .3))
+        distPID = PID(kp = .1, output_limits=(-.3, .3))
         angPID = PID(kp = .1, output_limits=(-.3, .3))
 
         while not rospy.is_shutdown():
