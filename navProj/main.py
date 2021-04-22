@@ -65,7 +65,7 @@ def GoTo(R, target, dist_pid, ang_pid):
         current = R.getMCLPose()
         # self.distError(current, target)
 
-        lspeed = dist_pid(distError(current, target))
+        lspeed = -1* dist_pid(distError(current, target))
         aspeed = ang_pid(angleError(current, target))
 
         print("dist and angle pid", (lspeed, aspeed))
