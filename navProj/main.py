@@ -82,13 +82,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     
     parser.add_argument("dotfile")
-    parser.add_argument("goal")
+    parser.add_argument("xgoal")
+    parser.add_argument("ygoal")
     parser.add_argument("--start", help="starting point of robot: (x, y)")
 
     args = parser.parse_args()
 
     if args.start:
-        start_loc = (tup[0], tup[1])
+        start_loc = args.start
 
         end_loc = to_tuple(args.goal)
 
