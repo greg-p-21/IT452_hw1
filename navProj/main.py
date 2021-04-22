@@ -48,6 +48,7 @@ def angleError(current, target):
 
 def GoTo(R, target, dist_pid, ang_pid):
     start = R.getMCLPose()
+    RATE = rospy.Rate(10)
 
     start_x = start[0]
     start_y = start[1]
