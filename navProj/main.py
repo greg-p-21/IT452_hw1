@@ -126,7 +126,7 @@ if __name__ == "__main__":
 
         while not rospy.is_shutdown():
             for p in points:
-                GoTo(R, p, distPID, angPID) 
+                GoTo(r, p, distPID, angPID) 
         
         print("Final location found")
 
