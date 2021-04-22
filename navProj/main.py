@@ -71,13 +71,16 @@ def GoTo(R, target, dist_pid, ang_pid):
         print("distance", distance)
         print("dist and angle pid", (lspeed, aspeed))
 
-        # R.drive(angSpeed=aspeed, linSpeed=lspeed)
+        R.drive(angSpeed=aspeed, linSpeed=lspeed)
 
         print("current position", R.getPositionTup())
         print("goal", target)
 
+        distance = math.sqrt(pow( current[0] - target_x, 2) + pow(current[1] - target_y, 2))
+
+
     print("Reached point")
-    R.drive(angSpeed=0, linSpeed=0)
+    R.drive(angSpeed=0, linSpeed=0.1)
 
 
 
