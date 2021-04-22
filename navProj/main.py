@@ -68,9 +68,10 @@ def GoTo(R, target, dist_pid, ang_pid):
         lspeed = -1* dist_pid(distError(current, target))
         aspeed = ang_pid(angleError(current, target))
 
+        print(distance)
         print("dist and angle pid", (lspeed, aspeed))
 
-        R.drive(angSpeed=aspeed, linSpeed=lspeed)
+        # R.drive(angSpeed=aspeed, linSpeed=lspeed)
 
         print("current position", R.getPositionTup())
 
