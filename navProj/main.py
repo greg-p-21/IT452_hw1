@@ -38,10 +38,10 @@ def angleError(current, target):
         angle = math.atan2(target_y - curr_y, target_x - curr_x)
         angleVel = angle - curr_yaw
 
-        if angleVel < -math.pi/4 or angleVel > math.pi/4:
-            if target_y < 0 and curr_y < target_y:
+        while angleVel < -math.pi/2 or angleVel > math.pi/2:
+            if angleVel > math.pi/2:
                 angleVel = -2*math.pi + angleVel
-            elif target_y >= 0 and curr_y > target_y:
+            elif angleVel < -math.pi/2:
                 angleVel = 2*math.pi + angleVel 
         
         return angleVel
@@ -59,7 +59,7 @@ def GoTo(R, target, dist_pid, ang_pid):
     goalDistance = math.sqrt(pow( start_x- target_x, 2) + pow(start_y - target_y, 2))
     distance = goalDistance
 
-    while distance > 0.1:
+    while distance > 0.5 and not rospy.is_shutdown():
         RATE.sleep()
 
         current = R.getMCLPose()
@@ -128,8 +128,8 @@ if __name__ == "__main__":
 
         print(route, points)
         
-        distPID = PID(kp = .1, output_limits=(-.3, .3))
-        angPID = PID(kp = .1, output_limits=(-.3, .3))
+        distPID = PID(kp = .1, output_limits=(-.4, .4))
+        angPID = PID(kp = .1, output_limits=(-.5, .5))
 
         while not rospy.is_shutdown():
             for p in points:
