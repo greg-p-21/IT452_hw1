@@ -1,7 +1,7 @@
 import argparse
-# import rospy,time,tf
+import rospy,time,tf
 
-# from turtleAPI import robot
+from turtleAPI import robot
 
 from route import dijkstras
 from adjMatrix import AdjMatrix
