@@ -83,7 +83,7 @@ if __name__ == "__main__":
     
     parser.add_argument("dotfile")
     parser.add_argument("xgoal")
-    parser.add_argument("ygoal")
+    # hello world
     parser.add_argument("--start", help="starting point of robot: (x, y)")
 
     args = parser.parse_args()
