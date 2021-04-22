@@ -72,7 +72,7 @@ def GoTo(R, target, dist_pid, ang_pid):
 
         R.drive(angSpeed=aspeed, linSpeed=lspeed)
 
-        # print("current position", R.getPositionTup())
+        print("current position", R.getPositionTup())
 
     print("Reached point")
     R.drive(angSpeed=0, linSpeed=0)
