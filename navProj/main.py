@@ -136,7 +136,7 @@ if __name__ == "__main__":
                 print(p)
                 GoTo(r, p, distPID, angPID) 
         
-        r.drive(angSpeed=0, angSpeed=0)
+        r.drive(angSpeed=0, linSpeed=0)
         print("Final location found")
 
     except Exception as e:
