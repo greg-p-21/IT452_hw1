@@ -128,14 +128,15 @@ if __name__ == "__main__":
 
         print(route, points)
         
-        distPID = PID(kp = .1, output_limits=(-.4, .4))
-        angPID = PID(kp = .2, output_limits=(-.5, .5))
+        distPID = PID(kp = .15, output_limits=(-.4, .4))
+        angPID = PID(kp = .25, output_limits=(-.5, .5))
 
         while not rospy.is_shutdown():
             for p in points:
                 print(p)
                 GoTo(r, p, distPID, angPID) 
         
+        r.drive(angSpeed=0, angSpeed=0)
         print("Final location found")
 
     except Exception as e:
