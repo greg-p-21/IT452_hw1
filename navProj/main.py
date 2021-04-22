@@ -1,7 +1,7 @@
 import argparse
-import rospy,time,tf
+# import rospy,time,tf
 
-from turtleAPI import robot
+# from turtleAPI import robot
 
 from route import dijkstras
 from adjMatrix import AdjMatrix
@@ -10,9 +10,8 @@ from pid import PID
 def to_tuple(string):
     res = []
     for token in string.split(", "):
-        num = float(token.replace("(", "").replace(")", ""))
+        num = float(token.replace("(", "").replace(")", "").replace('"', ""))
         res.append(num)
-    
     return tuple(res)
 
 def distError(current, target):
@@ -82,14 +81,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     
     parser.add_argument("dotfile")
-    parser.add_argument("xgoal")
-    parser.add_argument("ygoal")
-    parser.add_argument("--start", help="starting point of robot: (x, y)")
+    parser.add_argument("goal", help='end point of robot: "(x, y)"')
+    parser.add_argument("--start", help='starting point of robot: "(x, y)"')
 
     args = parser.parse_args()
 
     if args.start:
-        start_loc = args.start
+        start_loc = to_tuple(args.start)
 
         end_loc = to_tuple(args.goal)
 
