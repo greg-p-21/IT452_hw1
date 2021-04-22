@@ -61,6 +61,7 @@ def GoTo(R, target, dist_pid, ang_pid):
 
     while distance > 0.5 and not rospy.is_shutdown():
         RATE.sleep()
+        print("entered loop")
 
         current = R.getMCLPose()
         # self.distError(current, target)
@@ -80,7 +81,6 @@ def GoTo(R, target, dist_pid, ang_pid):
 
 
     print("Reached point")
-    R.drive(angSpeed=0, linSpeed=0.1)
 
 
 
