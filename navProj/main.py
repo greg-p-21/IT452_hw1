@@ -46,7 +46,9 @@ def angleError(current, target):
         
         return angleVel
 
-def GoTo(start, target, dist_pid, ang_pid):
+def GoTo(R, target, dist_pid, ang_pid):
+    start = R.getMCLPose()
+
     start_x = start[0]
     start_y = start[1]
 
@@ -120,11 +122,15 @@ if __name__ == "__main__":
 
         print(route, points)
         
-        pid = PID()
+        distPID = PID(kp = .05, output_limits=(-.3, .3))
+        angPID = PID(kp = .1, output_limits=(-.3, .3))
+
         while not rospy.is_shutdown():
             for p in points:
-                # GoTo(start_loc, end_loc, ) need first two points
-            
+                GoTo(R, p, distPID, angPID) 
+        
+        print("Final location found")
+
     except Exception as e:
         print(e)
         rospy.loginto("node now terminated")
