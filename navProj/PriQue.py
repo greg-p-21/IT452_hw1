@@ -1,4 +1,5 @@
 import sys
+import copy
 
 
 class PriQue(object):
@@ -121,9 +122,9 @@ class PriQue(object):
 
     def update(self, data):
         n = self.head
-
+        
         while n is not None:
             if n.data[0] == data[0]:
-                n.data[1] = data[1]
+                n.data = copy.copy(data)
                 break
             n = n.next

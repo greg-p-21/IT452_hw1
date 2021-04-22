@@ -19,6 +19,9 @@ class AdjMatrix:
         f = open(self.dotfile, "r")      
         flines = f.readlines()
         for line in flines:
+
+            # print(line)
+
             if 'graph' in line:
                 continue
 
@@ -27,14 +30,19 @@ class AdjMatrix:
                 label = values[0]
                 loc = values[3].split('"')[1][1:-1]
                 point = tuple(float(num) for num in loc.split(','))
+                # print(point)
 
                 self.points.append(Point(label, point))
 
             elif '--' in line:
                 values = line.split()
+                # pprint(values)
                 label1 = values[0]
-                label2 = values[2][0]
+                # print(label1)
+                label2 = values[2][:-1]
+                # pprint(self.points)
                 distance = self.getDistance(label1, label2)
+                
 
                 if label1 not in matrix:
                     matrix[label1] = {}
@@ -57,7 +65,7 @@ class AdjMatrix:
         self.points.append(strt)
         self.points.append(end)
 
-        pprint(matrix)
+        # pprint(matrix)
         return matrix
 
     def _addEdge(self, matrix, newPoint):
@@ -93,6 +101,18 @@ class AdjMatrix:
 
         return neighbors
 
+    def getVertices(self):
+        return list(self.matrix.keys())
+
+    def getPoints(self, path):
+        points = []
+        for loc in path:
+            for p in self.points:
+                if loc == p.getLabel:
+                    points.append((p.getX, p.getY))
+        
+        return points
+
 
 class Point:
 
@@ -106,6 +126,7 @@ class Point:
 
     @property
     def getY(self):
+        # print(self.location)
         return self.location[1]
 
     @property
@@ -117,5 +138,6 @@ class Point:
         return math.sqrt( pow(p1.getX - p2.getX, 2) + pow(p1.getY - p2.getY, 2) )
 
 if __name__ == "__main__":
-    adj = AdjMatrix("example.DOT", (0,0), (6,4))
-    pprint(adj.getNeighbors('C'))
+    adj = AdjMatrix("Hopper.DOT", (0,0), (-24, 1))
+    pprint(adj.matrix)
+    pprint(adj.getNeighbors('4a'))
