@@ -88,6 +88,7 @@ def GoTo(R, target, dist_pid, ang_pid):
 
 
 if __name__ == "__main__":
+    print("code running")
     parser = argparse.ArgumentParser()
     
     parser.add_argument("dotfile")
