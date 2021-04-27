@@ -72,7 +72,10 @@ def GoTo(R, target, dist_pid, ang_pid):
         print("distance", distance)
         print("dist and angle pid", (lspeed, aspeed))
 
-        R.drive(angSpeed=aspeed, linSpeed=lspeed)
+        if aspeed == .5 or aspeed == -.5:
+            R.drive(angSpeed=aspeed, linSpeed=0)
+        else:
+            R.drive(angSpeed=aspeed, linSpeed=lspeed)
 
         print("current position", R.getPositionTup())
         print("goal", target)
