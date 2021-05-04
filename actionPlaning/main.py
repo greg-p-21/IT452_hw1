@@ -53,22 +53,15 @@ if __name__ == "__main__":
         tup = r.getMCLPose()
 
         #get robot's location
-        start_loc = (2,-.5)
+        start_loc = (tup[0], tup[1])
 
         #read in intial world
         w = World(args.startJSON, start_loc, args.goalJSON)
-
-        # read in the goal world's locations and on
-        # goal_locs, goal_on = parse_json(args.goalJSON)
-        # print(goal_locs)
-
-
 
         # get astar actions list
         action_plan = aStar(w)
         print(action_plan)
 
-        
         # set PIDS
         distPID = PID(kp = .15, output_limits=(-.4, .4))
         angPID = PID(kp = .25, output_limits=(-.5, .5))
@@ -87,7 +80,7 @@ if __name__ == "__main__":
                     print(p)
                     GoTo(r, p, distPID, angPID) # adjust for color
                 r.drive(angSpeed=0, linSpeed=0)
-                print("Made it")
+                print("Completed dijk")
             else:
                 print(action, value)
                 time.sleep(2)
