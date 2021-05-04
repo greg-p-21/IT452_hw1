@@ -16,7 +16,7 @@ def aStar(start):
     #compare two world
     while ( start.__ne__() ):
         num += 1
-        print("in aStar")
+        # print("in aStar")
         closed.append(start)
         allSuccessors = start.getSuccessors()
         # print(allSuccessors.print)
@@ -39,6 +39,8 @@ def aStar(start):
                 opened.add(Fcost,w)
 
         start = opened.get() ####
+        if num % 1000:
+            print(start.actions)
 
     return start.actions
 
