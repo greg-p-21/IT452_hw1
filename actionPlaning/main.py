@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
         #get robot's location
         start_loc = (tup[0], tup[1])
-
+        print(start_loc)
         #read in intial world
         w = World(args.startJSON, start_loc, args.goalJSON)
 

@@ -67,6 +67,7 @@ def GoTo(R, target, dist_pid, ang_pid, printThis):
         # print("current position", R.getPositionTup())
         print(printThis)
         print("goal", target)
+        
 
         distance = math.sqrt(pow( current[0] - target_x, 2) + pow(current[1] - target_y, 2))
 
