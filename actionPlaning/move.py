@@ -33,7 +33,7 @@ def angleError(current, target):
         
         return angleVel
 
-def GoTo(R, target, dist_pid, ang_pid):
+def GoTo(R, target, dist_pid, ang_pid, printThis):
     start = R.getMCLPose()
     RATE = rospy.Rate(10)
 
@@ -64,7 +64,8 @@ def GoTo(R, target, dist_pid, ang_pid):
         else:
             R.drive(angSpeed=aspeed, linSpeed=lspeed)
 
-        print("current position", R.getPositionTup())
+        # print("current position", R.getPositionTup())
+        print(printThis)
         print("goal", target)
 
         distance = math.sqrt(pow( current[0] - target_x, 2) + pow(current[1] - target_y, 2))

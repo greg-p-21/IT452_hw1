@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 route, points = dijkstras(adj, ("start", s), ("finish", value))
                 for p in points:
                     print(p)
-                    GoTo(r, p, distPID, angPID) # adjust for color
+                    GoTo(r, p, distPID, angPID, action_plan) # adjust for color
                 r.drive(angSpeed=0, linSpeed=0)
                 print("Completed dijk")
             else:
